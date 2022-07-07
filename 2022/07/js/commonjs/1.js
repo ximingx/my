@@ -1,1 +1,5 @@
-console.log(`1.js`)
+module.exports = {
+    name: `ximingx`
+}
+
+exports.name = `aaa`
