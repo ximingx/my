@@ -1,5 +1,8 @@
-import {fname} from './1.js'
+import { name, age ,sc, aw} from "./1.js";
 
-console.log(fname)
+console.log(aw)
+console.log(`user: ${name} + ${age} + ${sc}`)
 
-export let aw = 123
+export {
+    name
+}

@@ -1,10 +1,11 @@
-import { aw } from './2.js'
-
-console.log(aw)
-
 let name = `ximingx`
-
-// 这里导出的是标识符, 不是对象, 是特殊语法
+let age = 20
+let school = `sxnydx`
+export let aw = 1
+console.log(`user: ${name} + ${age} + ${school}`)
+aw = 2
 export {
-    name as fname
+    name,
+    age,
+    school as sc
 }
