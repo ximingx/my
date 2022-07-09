@@ -1,5 +1,5 @@
 module.exports = {
-    name: `ximingx`
+  name: `ximingx`
 }
 
 exports.name = `aaa`
