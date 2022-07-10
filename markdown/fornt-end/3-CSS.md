@@ -4,6 +4,8 @@
 
 `CSS`表示层叠样式表, `Cascading Style Sheet`，简称：`CSS`，又称为又称串样式列表、级联样式表、串接样式表、阶层式样式表
 
+`W3C`官方网站: https://www.w3.org/TR/?tag=css
+
 ## 1. : 初识
 
 ### 1. css 介绍
@@ -118,16 +120,16 @@ h1 {
 直接使用`HTML标签`的名称作为选择器,就可以直接选中页面中同名的`HTML标签`, 统一添加样式.
 
 ```html
-	<div>选中</div>	
-	<p>不选中</p>	
-	<div>选中</div>	
-	<style>
-		/* 选中页面中所有的div元素 */
-		div{
-			color:red;
-		}
+<div>选中</div>
+<p>不选中</p>
+<div>选中</div>
+<style>
+  /* 选中页面中所有的div元素 */
+  div{
+    color:red;
+  }
 
-	</style>
+</style>
 ```
 
 ### 2. 类选择器 
