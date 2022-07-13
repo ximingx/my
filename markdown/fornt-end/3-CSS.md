@@ -877,6 +877,8 @@ body {
 }
 ```
 
+ `Unicode` 编码以及`多个不连续的英文单词`需要使用 `""` 包裹
+
 > `font-weight`
 
 ◼ `100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900` ：每一个数字表示一个重量
@@ -887,9 +889,25 @@ body {
 
 `strong`、`b`、`h1~h6`等标签的`font-weight`默认就是`bold`
 
+> `font-variant`
 
+◼ `normal`：常规显示
 
+◼ `small-caps`：将小写字母替换为缩小过的大写字母
 
+> `line-height`
+
+行高可以先简单理解为一行文字所占据的高度
+
+行高的严格定义是：两行文字基线（`baseline`）之间的间距
+
+基线（`baseline`）：与小写字母`x`最底部对齐的线
+
+![image-20220713123439550](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202207131235899.png)
+
+可以用于设置一行文字的内容垂直居中, 让`line-height`等同于`height`
+
+> `font`
 
 
 
