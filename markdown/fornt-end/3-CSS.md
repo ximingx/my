@@ -851,6 +851,8 @@ h1 {
 
 > `font-size`决定文字的大小
 
+浏览器默认字体 `16px`
+
 - 具体数值+单位
 
 比如`100px`
@@ -861,6 +863,32 @@ h1 {
 
 基于父元素的`font-size`计算，比如`50%`表示等于父元素`font-size`的`一半`
 
+> `font-family`用于设置文字的字体名称
+
+可以设置1个或者多个字体名称; 
+
+浏览器会选择列表中第一个该计算机上有安装的字体; 
+
+或者是通过 `@font-face` 指定的可以直接下载的字体。
+
+```css
+body {
+  font-family: "Adobe 宋体 Std L", serif;
+}
+```
+
+> `font-weight`
+
+◼ `100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900` ：每一个数字表示一个重量
+
+◼ `normal`：等于`400 `
+
+◼ `bold`：等于`700`
+
+`strong`、`b`、`h1~h6`等标签的`font-weight`默认就是`bold`
+
+
+
 
 
 
@@ -869,7 +897,7 @@ h1 {
 
 ### 3. 颜色属性
 
-`color`属性 设置字体的颜色
+`color`属性设置前景色, 不仅仅是文本的颜色
 
 ### 4. 文本属性
 
@@ -880,6 +908,7 @@ h1 {
 | `line-height`     | 设置行高(一行的高度)               |                                                              | 经常讲行高设置为和元素等高,实现单行文本的垂直居中效果.       |
 | `text-transform`  | 设置英文的大小写转换方式           | `none  `不做修改(默认值)<br/>	`capitalize  `首字母大写<br/>	`uppercase `全部变为大写字母<br/>	`lowercase `全部变为小写字母 | 实际开发中用`JavaScript`代码转化的更多                       |
 | `letter-spacing`  | 设置字母之间的距离                 |                                                              | 汉字作为字符处理,该属性对其生效.                             |
+| `word-spacing`    | 设置单词之间的距离                 |                                                              |                                                              |
 | `text-indent`     | 设置元素内部第一行和左侧的缩进距离 | 用于设置第一行内容的缩进                                     | `text-indent: 2em;` 刚好是缩进2个文字                        |
 | `white-space`     | 设置元素对于空白的处理方式         | `normal `正常处理方式(默认值)<br/>	`pre `显示源代码中的格式,遇到边界不换行<br/>	`nowrap `强制内容不换行(软回车),除非遇到br标签<br/>	`pre-wrap` 显示源代码中的格式,遇到边界换行<br/>	`pre-line`  保持换行字符显示,但是空白字符不显示 |                                                              |
 | `text-decoration` | 设置文本修饰属性                   | `none  `没有修饰线<br/>	 `underline  `下划线<br/>	 `overline   `上划线<br/>	 `line-through `贯穿线/删除线 | 取值为 `none`的时候无任何装饰, 可以去除`a`元素默认的下划线, `a`元素有下划线的本质是被添加了`text-decoration`属性 |
@@ -896,9 +925,47 @@ h1 {
 
 `justify`：两端对齐
 
-> `justify` 单独使用时不会生效
+> `justify` 单独使用时不会生效, 一般使用场景很少, 会使得左右预留的空间消失, 达到两端对齐, 但是对最后一行无效
 
+```html
+<style>
+  div {
+    width: 400px;
+    background: black;
+    text-align: justify;
+    color: white
+  }
+</style>
 
+<div>
+  `text-align` 设置行内`inline`元素的对齐方式, 定义行内`inline`元素（例如`文字`, `图片`）如何相对它的块父元素对齐
+</div>
+```
+
+![image-20220713092903266](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202207130929369.png)
+
+```html
+<style>
+  div {
+    width: 400px;
+    background: black;
+    text-align: right;
+    color: white;
+  }
+</style>
+
+<div>
+  `text-align` 设置行内`inline`元素的对齐方式, 定义行内`inline`元素（例如`文字`, `图片`）如何相对它的块父元素对齐
+</div>
+```
+
+![image-20220713093014396](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202207130930497.png)
+
+但是可以使用`text-align-last`使得最后的一行样式生效
+
+```css
+text-align-last: justify;
+```
 
 ### 5. 书写模式
 
@@ -3830,6 +3897,12 @@ $primary-color: #333;
 当使用`link` 的  `rel` 为 `dns-prefetch` 时, 可帮助开发人员掩盖 `DNS 解析`延迟。对于打开了与许多第三方的连接的网站，此延迟可能会大大降低加载性能。
 
 `dns-prefetch` 仅对跨域上的` DNS 查找`有效
+
+> `link `解析 `css` 的时候不会阻塞 `DOM `树的生成, 但是, 通过`@import` 会造成一些影响
+
+不推荐在 `html` 里使用 `@import` , 会导致先拿到资源, 再去解析
+
+
 
 ## 2. 进制转换
 
