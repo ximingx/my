@@ -849,6 +849,24 @@ h1 {
 | `font-variant` | 设置字体是否变为小型大写字母 |
 | `font`         | 设置字体                     |
 
+> `font-size`决定文字的大小
+
+- 具体数值+单位
+
+比如`100px`
+
+也可以使用`em`单位(不推荐)：`1em`代表`100%`，`2em`代表`200%`，`0.5em`代表`50%`
+
+- 百分比
+
+基于父元素的`font-size`计算，比如`50%`表示等于父元素`font-size`的`一半`
+
+
+
+
+
+
+
 ### 3. 颜色属性
 
 `color`属性 设置字体的颜色
@@ -860,11 +878,27 @@ h1 {
 | `text-align`      | 设置内容的水平对其方式             | `left  `靠左对齐(默认)	<br>`center `水平居中	<br/>`right  `靠右 | 对块状元素有效                                               |
 | `vertical-align`  | 置内容的垂直对其方式               | `top  `顶部对其	<br/>`middle `垂直居中<br/>`bottom `底部  | 对内联元素和表格的单元格元素有效.                            |
 | `line-height`     | 设置行高(一行的高度)               |                                                              | 经常讲行高设置为和元素等高,实现单行文本的垂直居中效果.       |
-| `text-transform`  | 设置英文的大小写转换方式           | `none  `不做修改(默认值)<br/>	`capitalize  `首字母大写<br/>	`uppercase `全部变为大写字母<br/>	`lowercase `全部变为小写字母 |                                                              |
+| `text-transform`  | 设置英文的大小写转换方式           | `none  `不做修改(默认值)<br/>	`capitalize  `首字母大写<br/>	`uppercase `全部变为大写字母<br/>	`lowercase `全部变为小写字母 | 实际开发中用`JavaScript`代码转化的更多                       |
 | `letter-spacing`  | 设置字母之间的距离                 |                                                              | 汉字作为字符处理,该属性对其生效.                             |
-| `text-indent`     | 设置元素内部第一行和左侧的缩进距离 |                                                              | 在进行汉语相关的内容布局时,通常使用em作为单位,在p标签中比较常见 |
+| `text-indent`     | 设置元素内部第一行和左侧的缩进距离 | 用于设置第一行内容的缩进                                     | `text-indent: 2em;` 刚好是缩进2个文字                        |
 | `white-space`     | 设置元素对于空白的处理方式         | `normal `正常处理方式(默认值)<br/>	`pre `显示源代码中的格式,遇到边界不换行<br/>	`nowrap `强制内容不换行(软回车),除非遇到br标签<br/>	`pre-wrap` 显示源代码中的格式,遇到边界换行<br/>	`pre-line`  保持换行字符显示,但是空白字符不显示 |                                                              |
-| `text-decoration` | 设置文本修饰属性                   | `none  `没有修饰线<br/>	 `underline  `下划线<br/>	 `overline   `上划线<br/>	 `line-through `贯穿线/删除线 |                                                              |
+| `text-decoration` | 设置文本修饰属性                   | `none  `没有修饰线<br/>	 `underline  `下划线<br/>	 `overline   `上划线<br/>	 `line-through `贯穿线/删除线 | 取值为 `none`的时候无任何装饰, 可以去除`a`元素默认的下划线, `a`元素有下划线的本质是被添加了`text-decoration`属性 |
+
+> `text-align` 设置行内`inline`元素的对齐方式, 定义行内`inline`元素（例如`文字`, `图片`）如何相对它的块父元素对齐
+
+属性与值:
+
+`left`：左对齐
+
+`right`：右对齐
+
+`center`：正中间显示
+
+`justify`：两端对齐
+
+> `justify` 单独使用时不会生效
+
+
 
 ### 5. 书写模式
 
@@ -3982,3 +4016,978 @@ R（红）、G（绿）、B （蓝）可以是`<number>`（数字），或者`<p
 
 
 # X> 面试
+
+
+
+## 一. 说说你对元素语义化的理解
+
+元素语义化就是用正确的元素做正确的事情。虽然在理论上，所以的html元素都可以通过css样式实现相同的事情，但是这么做会使事情复杂化，所以我们需要元素语义化来降低复杂度。
+
+元素语义化在我们实际的开发中有很多好处，比如：
+
+* 提高代码的阅读性和可维护性;
+* 减少coder之间的沟通成本;
+* 能让语音合成工具正确识别网页元素的用途，以便做出正确的反应
+* 有利于SEO(Search Engine Optimization)
+
+
+
+## 二. 说说你对SEO的理解
+
+SEO就是搜索引擎优化(Search Engine Optimization)，SEO通过了解搜索引擎的运行规则来调整网站，以提高网站的曝光度,以及网站的排名。
+
+
+
+Google 搜索引擎的工作流程主要分为三个阶段：
+
+**抓取**：Google 会使用名为“抓取工具”的自动程序搜索网络，以查找新网页或更新后的网页。Google 会将这些网页的地址（即网址）存储在一个大型列表中，以便日后查看。我们会通过许多不同的方法查找网页，但主要方法是跟踪我们已知的网页中的链接。
+
+**编入索引**：Google 会访问它通过抓取得知的网页，并会尝试分析每个网页的主题。Google 会分析网页中的内容、图片和视频文件，尝试了解网页的主题。这些信息存储在 Google 索引中，而 Google 索引是一个存储在海量计算机中的巨大数据库。
+
+**呈现搜索结果**：当用户在 Google 上进行搜索时，Google 会尝试确定最优质的搜索结果。“最佳”结果取决于许多因素，包括用户的位置、语言、设备（桌面设备或手机）以及先前用过的搜索查询。例如，在用户搜索“自行车维修店”后，Google 向巴黎用户显示的答案与向香港用户显示的答案有所不同。支付费用不能提高网页在 Google 搜索结果中的排名，网页排名是完全依靠算法完成的。
+
+
+
+## 三. 什么是字符编码？
+
+计算机只认识0和1，但我们各个国家的人都需要在计算机上使用各自的文字，为了在计算机上也能表示、存储和处理像文字、符号等等之类的字符，就必须将这些字符转换成二进制。
+
+于是就出现了字符编码，字符编码将我们的自然语言编码成二进制给计算机看，然后再把这些二进制解码为自然语言给我们看。
+
+
+
+## 四. CSS编写样式的方式以及应用场景
+
+css有三种常用的编写方式，分别是内联样式、内部样式表和外部样式表
+
+* 内联样式的应用场景：在Vue的template中某些动态的样式会使用内联样式
+* 内部样式表的应用场景：Vue开发中，每个组件都有一个style元素，使用的是内部样式表的方式，不过原理并不相同
+* 外部样式表的应用场景：外部样式表是开发中最常用的方式，将所有css文件放在一个独立的文件夹中，然后通过link元素引入到需要的文件中.
+
+* 也可以在index.css文件中通过 @import url(路径) 引入其他css样式
+
+
+
+## 五. 最常见的CSS样式以及作用
+
+最常见的css样式有：
+
+* font-size：设置文字大小
+* color：设置前景色(颜色)
+* background-color：设置背景色
+* width：设置宽度
+* height：设置高度
+
+
+
+## 六. 自行查找2个案例练习
+
+根据之前学习的HTML元素和CSS样式找2个案例练习
+
+* 案例一：登录案例
+
+  * ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+        * {
+          margin: 0;
+          padding: 0;
+        }
+    
+        .content {
+          background-color: lightblue;
+          position: absolute;
+          top: 50%;
+          /* left: 0; */
+          width: 100%;
+          height: 400px;
+          margin-top: -200px;
+          /* overflow: hidden; */
+        }
+    
+        .main {
+          text-align: center;
+          max-width: 600px;
+          height: 400px;
+          padding: 100px 0;
+          margin: 0 auto;
+        }
+    
+        .main h1 {
+          font-size: 80px;
+          font-weight: 2px;
+        }
+    
+        form {
+          padding: 20px 0;
+        }
+    
+        form input {
+          border: 1px solid white;
+          display: block;
+          margin: 0px auto 10px auto;
+          padding: 10px;
+          width: 220px;
+          border-radius: 30px;
+          font-size: 20px;
+          font-weight: 300;
+          text-align: center;
+        }
+    
+        form input:hover {
+          background-color: lightcyan;
+        }
+    
+        form button {
+          background-color: lightgreen;
+          border-radius: 10px;
+          border: 0;
+          width: 100px;
+          height: 50px;
+          padding: 5px 10px
+        }
+    
+        form button:hover {
+          background-color: lightcoral;
+        }
+      </style>
+    </head>
+    
+    <body>
+      <div class="content">
+        <div class="main">
+          <h1>Welcome</h1>
+          <form>
+            <input type="text" name="" id="" placeholder="请输入账号">
+            <input type="password" name="" id="" placeholder="请输入密码">
+            <button type="submit">登&nbsp;&nbsp;录</button>
+          </form>
+        </div>
+      </div>
+    </body>
+    
+    </html>
+    ```
+
+* 案例二：网页布局案例
+
+  * ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+        * {
+          margin: 0;
+          padding: 0;
+        }
+    
+        .header {
+          width: 100%;
+          height: 100px;
+          text-align: center;
+          background-color: lightblue;
+        }
+    
+        .main {
+          width: 100%;
+          height: 600px;
+          text-align: center;
+          background-color: lightgreen;
+        }
+    
+        .footer {
+          width: 100%;
+          height: 100px;
+          background-color: lightcoral;
+        }
+      </style>
+    </head>
+    
+    <body>
+      <div class="header">
+        网页头部信息
+      </div>
+      <div class="main">
+        网页内容信息
+      </div>
+      <div class="footer">
+        网页底部信息
+      </div>
+    </body>
+    
+    </html>
+    ```
+
+
+
+## 七.颜色的表示方式
+
+**1.颜色关键字:**,  例如,  red, yellow 等
+
+
+
+**2.RGB有三种表示方式：**
+
+所有颜色都是由三原色R(red)G(green)B(blue)组成，也就是通过调整这三个颜色不同的比例组合成其他的颜色，RGB各个原色的取值是0~255。
+
+- RGB颜色可以通过以#为前缀的十六进制字符和函数（rgb()、rgba()）标记表示。
+
+- **方式一：十六进制符号：**#RRGGBB[AA]
+
+- - R（红）、G（绿）、B （蓝）和A （alpha）是十六进制字符（0–9、A–F）；A是可选的。
+
+  - - 比如，#ff0000等价于#ff0000ff；
+
+- **方式二：十六进制符号：**#RGB[A]
+
+- - R（红）、G（绿）、B （蓝）和A （alpha）是十六进制字符（0–9、A–F）；
+
+  - 三位数符号（#RGB）是六位数形式（#RRGGBB）的减缩版。
+
+  - - 比如，#f09和#ff0099表示同一颜色。
+
+  - 四位数符号（#RGBA）是八位数形式（#RRGGBBAA）的减缩版。
+
+  - - 比如，#0f38和#00ff3388表示相同颜色。
+
+- **方式三：函数符：** rgb[a](R, G, B[, A])
+
+- - R（红）、G（绿）、B （蓝）可以是<number>（数字），或者<percentage>（百分比），255相当于100%。
+  - A（alpha）可以是0到1之间的数字，或者百分比，数字1相当于100%（完全不透明）。
+
+
+
+## 二. 具体说明text-align居中的条件
+
+text-align居中针对是行内级元素(inline-level),比如图片img,文字等.
+
+对于块级元素,想要实现居中,可以通过display:inline-block将块级元素转换成行内块元素
+
+
+
+## 三. line-height为什么可以让文字居中？
+
+line-height表示一行文字的高度,也是两行文字基线之间的间距.
+
+当line-height=height,就可以使这行文字在div内部垂直居中.
+
+这是因为行高-文本高度(font-size)=行距,而行距平均分成上下两块,就使文本垂直居中了.
+
+
+
+## 四. 总结目前所学过的所有选择器？思考它们的应用场景。
+
+* 通用选择器    *{}
+* 简单选择器
+  * 类选择器  .box {}
+  * id选择器    #box {}
+  * 元素选择器    div {}
+* 后代选择器
+  * 所有的后代(直接或者间接的后代),用空格分割  .box  span {}
+  * 直接子代选择器,用>分割   .box>span {}
+* 属性选择器    
+  * 拥有某一个属性  [attr] {}
+  * 属性等于某一个值   [att=val] {}
+  * 属性包含某一个值  [attr^=val]{}
+* 兄弟选择器
+  * 相邻兄弟选择器,用+连接   .one+div {}
+  * 普遍兄弟选择器,用~连接     .one~div {}
+* 选择器组
+  * 交集选择器 ,    需要同时符合两个选择器条件(两个选择器紧密连接).在开发中通常为了精准的选择某一个元素
+  * 并集选择器: 符合一个选择器条件即可(两个选择器以,号分割.  在开发中通常为了给多个元素设置相同的样式
+* 伪类选择器
+  * 动态伪类  ,有:link ,:visited,:hover,:active,:focus
+  * 目标伪类  ,有:target
+  * 语言伪类,有:lang()
+  * 元素状态伪类  :enabled,:disabled,:checked
+  * 结构伪类,
+    * :nth-child(n),:nth-last-child(n) ,:nth-of-type(n),:nth-last-of-type(n)
+    * :first-child,:last-child,:first-of-type,:last-of-type
+    * :root,:only-child,:only-of-type ,:empty
+  * 否定伪类,有:not
+
+
+
+## 五. 预习结构伪类的使用方法。
+
+
+
+* E:nth-child(n)   匹配父元素中的第n个子元素E
+
+* E:nth-last-child(n)   匹配父元素下倒数第n个子元素
+
+* E:nth-of-type(n)    匹配父元素下指定类型的第n个子元素
+
+* E:nth-last-of-type(n)    匹配父元素下指定类型的倒数第n个子元素
+
+  
+
+* E:first-child   匹配父元素中的第一个子元素E
+
+* E:last-child   匹配父元素中的最后一个子元素E
+
+* E:first-of-type   匹配父元素下指定类型的第一个子元素
+
+* E:last-of-type  匹配父元素下指定类型的最后一个子元素
+
+  
+
+* :root  匹配文档树的根元素
+
+* :only-child   匹配没有任何兄弟元素的元素
+
+* :only-of-type   代表了任意一个元素，这个元素没有其他相同类型的兄弟元素。
+
+* :empty   代表没有子元素的元素。子元素只可以是元素节点或文本（包括空格）
+
+
+
+## 一. 完成课堂所有代码（总结、整理）
+
+### 1.1. text-decoration
+
+- `text-decoration`用于设置文字的装饰线(decoration-装饰) (不是继承属性)
+- `text-decoration`有如下常见取值:
+  - `none`：无任何装饰线(可以去除a元素默认的下划线)
+  - `underline`：下划线
+  - `overline`：上划线
+  - `line-through`：中划线（删除线）
+- `text-decoration`属性是一种简写属性，并且可以使用普通属性三个值中的任何一个。普通属性如下：
+  - `text-decoration-line`:文本修饰的位置, 如`下划线underline`，删除线`line-through`
+  - `text-decoration-color`:文本修饰的颜色
+  - `text-decoration-style`:文本修饰的样式, 如`波浪线wavy`、`实线solid`、`虚线dashed`
+  - `text-decoration-thickness`:文本修饰线的粗细(`px`)
+- a元素有下划线的本质是被添加了`text-decoration:underline`属性
+- 一般会建一个reset.css文件 重置浏览器默认添加的样式
+
+```
+/* 消除 a 元素默认的下划线 */
+a {
+  text-decoration: none;
+}
+```
+
+- 例子:
+
+```
+/* 红色 波浪 下划线 2px */
+text-decoration:wavy underline red 2px
+```
+
+
+
+### 1.2. text-transform(了解)
+
+- `text-transform`用于设置文字的大小写转换 (是继承属性)
+- `text-transform`有几个常见的值:
+  - `capitalize`：(使…首字母大写, 资本化的意思)将每个单词的首字符变为大写
+  - `uppercase`：(大写字母)将每个单词的所有字符变为大写
+  - `lowercase`：(小写字母)将每个单词的所有字符变为小写
+  - `none`：没有任何影响
+- 实际开发中用JavaScript代码转化的更多
+
+
+
+### 1.3. text-indent
+
+- `text-indent`属性能定义一个块元素首行文本内容之前的缩进量 (是继承属性)
+- 属性值:
+  - `<length>`:使用固定的<length>值来指定文本的缩进。允许使用负值。
+  - `<percentage>`:使用包含块宽度的百分比作为缩进
+  - ` each-line(实验中)`:文本缩进会影响第一行，以及使用`<br>`强制断行后的第一行
+- `text-indent: 2em`:刚好是缩进2个文字;
+- 例子:
+
+```
+/* <length> 长度值 */
+text-indent: 3mm;
+text-indent: 40px;
+
+/* <percentage>百分比值取决于其包含块（containing block）的宽度*/
+text-indent: 15%;
+
+/* 关键字 */
+text-indent: 5em each-line;
+text-indent: 5em hanging each-line;
+
+```
+
+
+
+### 1.4. text-align(重要)
+
+
+
+- `text-align`: 直接翻译过来设置文本的水平对齐方式 (是继承属性)(是继承属性)
+
+- `text-align` 并不控制块元素自己的对齐，只控制它的行内内容的对齐
+
+- MDN解释: 定义行内内容（例如文字）如何相对它的块父元素对齐(可以设置图片居中)
+
+- W3C官方文档解释: 设置行内(inline-level)元素(没有填满父元素)在快级父元素的对齐方式
+
+- `text-align`常用的值:
+
+  - `left`：左对齐
+  - `right`：右对齐
+  - `center`：正中间显示
+  - `justify`：对最后一行无效(如果文字只有一行也无效)
+
+- 直接设置对块级元素(例如`<div>`)无效 可以更改`<div>`的`display`为`inline-block`
+
+  - 例如:
+
+  ```
+    .box {
+    /* 直接设置对快级元素无效*/
+      text-align: center;
+    }
+    div {
+      /* 设置为行内元素 */
+      display: inline-block;
+    }
+  ```
+
+- 备注:居中一个块元素且不居中它的行内内容的标准兼容的方法是将它的左、右`margin`设为`auto`, 例如：`margin:auto`; 或`margin:0 auto`; 或m`argin-left:auto`; m`argin-right:auto`;
+
+
+
+### 1.5. letter-word-spacing
+
+- `letter-spacing`、`word-spacing`分别用于设置字母、单词之间的间距
+- 默认是0，可以设置为负数
+
+```
+ p {
+    letter-spacing: 5px;
+    word-spacing: 10px;
+ }
+```
+
+
+
+### 1.6. font-size
+
+- `font-size`决定文字的大小(是继承属性)
+- 属性值:
+  - `<length>`:
+    - 长度值 px(像素) 用像素字体定义使得字体大小不可由用户的浏览器改变`font-size: 30px`
+    - em:em = 希望得到的像素大小 / 父元素字体像素大小  `font-size: 1.5em`  
+  - `<relative-size>`，相对大小值
+    - 比父元素的字体大或小，使用与上面的关键字的相近缩放比率
+    - `font-size: larger`; `font-size: smaller`
+  - `<percentage>`:百分比值 父元素字体大小的百分比:`font-size: 80%`
+- 技巧:设置body元素的字体大小为62.5% (即默认大小16px的62.5%)，等于10px。现在你可以通过计算基准大小10px的倍数，在任何元素上方便的使用em单位。这样有6px = 0.6em, 8px = 0.8em, 12px = 1.2em等
+
+```
+body {
+    font-size: 62.5%;
+} 
+p {
+    font: size 1.8em;(相当于18px)
+}
+```
+
+### 1.7. font-family
+
+- `font-family`用于设置文字的字体名称 一般仅设置一次(是继承属性)
+- 可以设置1个或者多个字体名称
+- 浏览器会选择列表中第一个该计算机上有安装的字体
+- 或者是通过 @font-face 指定的可以直接下载的字体
+- 常见的属性:
+  - `serif`:带衬线字体，笔画结尾有特殊的装饰线或衬线
+  - `sans-serif`:无衬线字体，即笔画结尾是平滑的字体
+  - `monospace`:等宽字体，即字体中每个字宽度相同
+  - `cursive`:草书字体。这种字体有的有连笔，有的还有特殊的斜体效果
+  - `fantasy`:Fantasy 字体主要是那些具有特殊艺术效果的字体
+  - `system-ui`:从浏览器所处平台处获取的默认用户界面字体
+  - `math`:针对显示数学相关字符的特殊样式问题而设计的字体：支持上标和下标、跨行括号、嵌套表达式和具有不同含义的double struck glyphs
+  - `emoji`;专门用于呈现 Emoji 表情符号的字体
+  - `fangsong`:一种汉字字体，介于宋体和楷体之间。这种字体常用于某些政府文件
+- 备注:一般建一个base.css文件确定整个网页的字体
+
+```
+/* 直接设置body的样式 */
+body {
+  font-family: "Gill Sans", sans-serif;
+  /* 京东设置的字体 */
+  /* font-family: "Microsoft YaHei", "Heiti SC", tahoma, arial, "Hiragino Sans GB", "\5B8B\4F53", sans-serif; */
+}
+```
+
+### 1.8. font-weight
+
+- `font-weight`用于设置文字的粗细(重量) (是继承属性)
+- 属性值:
+  - `normal`:正常粗细。与400等值。
+  - `bold`:加粗。 与700等值 
+  - `lighter`:比从父元素继承来的值更细(处在字体可行的粗细值范围内)(规则:父元素1-500 lighter=100 父元素600-700 lighter=400 父元素800-900 lighter=700)
+  - `bolder`;比从父元素继承来的值更粗 (处在字体可行的粗细值范围内)(规则:父元素1-300 bolder=400 父元素400-500 bolder=700 父元素600-900 bolder=900)
+  - `<number>`:一个介于 `1` 和 `1000` (包含) 之间的 `<number>` 类型值
+- 如果一个字体只有 `normal` 和 `bold` 两种粗细值选择，指定粗细值为 100-500 时，实际渲染时将使用 `normal`，指定粗细值为 600-900 时，实际渲染时将使用 `bold`
+- 例子:
+
+```
+/* 关键字值 */
+font-weight: normal;
+font-weight: bold;
+
+/* 相对于父元素的关键字值 */
+font-weight: lighter;
+font-weight: bolder;
+
+/* 具体的数值 */
+font-weight: 1
+font-weight: 100;
+font-weight: 100.6;
+font-weight: 123;
+font-weight: 321;
+font-weight: 400;
+font-weight: 700;
+font-weight: 1000;
+
+```
+
+### 1.9. font-style
+
+- `font-style`用于设置文字的常规、斜体显示 (是继承属性)
+- 属性值:
+  - `normal`:常规显示
+  - `italic`(斜体):用字体的斜体显示(通常会有专门的字体) 
+  - `oblique`(倾斜):文本倾斜显示(仅仅是让文字倾斜)
+- 例子:
+
+```
+  /* oblique，可附加一个可选的角度 */
+      font-style: oblique 20deg;
+```
+
+### 1.10. font-varient
+
+- `font-variant`可以影响小写字母的显示形式
+- 属性值:
+  - `normal`:常规显示
+  - `small-caps`:将小写字母替换为缩小过的大写字母
+- 例子:
+  `font-variant: small-caps`
+
+### 1.11. line-height
+
+
+
+- `line-height`:两行文字基线(`baseline`)之间的间距 基线(`baseline`):与小写字母x最底部对齐的线
+- 行高 - 文本高度  = 行距
+- 属性值:
+  - `normal`:取决于用户端。桌面浏览器（包括Firefox）使用默认值，约为1.2，这取决于元素的 `font-family`
+  - `<数字>`:该属性的应用值是这个无单位数字<数字>乘以该元素的字体大小`这是设置line-height的推荐方法，不会在继承时产生不确定的结果`
+  - `<长度>`:指定<长度>用于计算 line box 的高度 以 em 为单位的值可能会产生不确定的结果
+  - `<百分比>`:与元素自身的字体大小有关。计算值是给定的百分比值乘以元素计算出的字体大小。百分比值可能会带来不确定的结果
+- `height`:元素的整体高度 `line-height`:元素中每一行文字所占据的高度
+- 假设div中只有一行文字，如何让这行文字在div内部垂直居中 让`line-height`等同于`height`
+
+
+
+### 1.12. font缩写属性
+
+- `font` 属性可以用来作为 `font-style`, `font-variant`, `font-weight`, `font-size`, `line-height` 和 `font-family` 属性的简写，或将元素的字体设置为系统字体
+- 规则:
+  - `ont-style`、`font-variant`、`font-weight`可以随意调换顺序，也可以省略 
+  - `line-height`可以省略，如果不省略，必须跟在`font-size`后面
+  - `font-size`、`font-family`不可以调换顺序，不可以省略
+- 例子:
+
+```
+    /* 文字属性 */
+      font-style: italic;
+      font-variant: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 1.5;
+      font-family: cursive;
+
+    /* 缩写 等价于上面的设置*/
+      font: italic normal 700 24px/1.5 cursive;
+```
+
+
+
+## 二. 具体说明text-align居中的条件
+
+- `text-align`: 直接翻译过来设置文本的水平对齐方式 (是继承属性)(是继承属性)
+
+- `text-align` 并不控制块元素自己的对齐，只控制它的行内内容的对齐
+
+- MDN解释: 定义行内内容（例如文字）如何相对它的块父元素对齐(可以设置图片居中)
+
+- W3C官方文档解释: 设置行内(inline-level)元素(没有填满父元素)在快级父元素的对齐方式
+
+
+## 三. line-height为什么可以让文字居中？
+
+- `line-height`:两行文字基线(`baseline`)之间的间距 基线(`baseline`):与小写字母x最底部对齐的线
+- 一行文本 等于 line-height
+- 行高 - 文本高度  = 行距
+- 属性值:
+  - `normal`:取决于用户端。桌面浏览器（包括Firefox）使用默认值，约为1.2，这取决于元素的 `font-family`
+  - `<数字>`:该属性的应用值是这个无单位数字<数字>乘以该元素的字体大小`这是设置line-height的推荐方法，不会在继承时产生不确定的结果`
+  - `<长度>`:指定<长度>用于计算 line box 的高度 以 em 为单位的值可能会产生不确定的结果
+  - `<百分比>`:与元素自身的字体大小有关。计算值是给定的百分比值乘以元素计算出的字体大小。百分比值可能会带来不确定的结果
+- `height`:元素的整体高度 `line-height`:元素中每一行文字所占据的高度
+- 假设div中只有一行文字，如何让这行文字在div内部垂直居中 让`line-height`等同于`height`
+
+## 四. 总结目前所学过的所有选择器？思考它们的应用场景。
+
+### 4.1. 统配选择器
+
+- 通配选择器(universal selector):所有的元素都会被选中
+
+  - 用法: `*{}`
+  - 通配选择器是性能最低的一个CSS选择器 不推荐使用
+  - 例子:
+
+  ```
+   * {
+      color: skyblue;
+      font-size: 18px;
+    }
+       
+  ```
+
+### 4.2. 简单选择器(重要)
+
+- 简单选择器
+
+  - 元素选择器(type selectors):会匹配该文档中所有此类型的元素
+
+    - 用法:`元素名称{样式声明}`
+    - 例子: 
+
+    ```
+    span {
+      color: skyblue;
+      font-size: 16px;
+    }
+    ```
+
+  - 类选择器(class selectors):类属性被定义为一个以空格分隔的列表项，在这组类名中，包含类选择器中的类名，样式声明才会生效
+
+    - 用法:`.类名 {样式声明} `
+    - 例子:
+
+    ```
+    .classname {
+      color: red;
+      font-size: 20px;
+    }
+    ```
+
+  - id选择器(id selectors):元素 id 属性名必须与选择器中的 id 属性名完全匹配，样式声明才会生效
+
+    - 用法:`#id属性值 {样式声明} `
+    - 备注:一个HTML文档里面的id值是唯一的，不能重复，id值如果由多个单词组成，单词之间可以用`中划线-`、`下划线_`连接，也可以使用`驼峰标识`  最好不要用标签名作为id值
+    - 例子
+
+    ```
+     #idname {
+      color: purple;
+      font-size: 24px;
+    }
+    ```
+
+
+
+### 4.3. 属性选择器
+
+- 属性选择器(attribute selectors)
+- 用法:
+  - `[attr]`:表示带有以 attr 命名的属性的元素
+  - `[attr=value]`:表示带有以 attr 命名的属性，且属性值为 value 的元素
+  - `[attr*=value]`:表示带有以 attr 命名的属性，且属性值至少包含一个 value 值的元素
+  - `[attr^=value]`;表示带有以 attr 命名的属性，且属性值是以 value 开头的元素
+  - `[attr$=value]`:表示带有以 attr 命名的属性，且属性值是以 value 结尾的元素
+  - `[attr|=value]`:表示带有以 attr 命名的属性的元素，属性值为“value”或是以“value-”为前缀
+  - `[attr~=value]`;表示带有以 attr 命名的属性的元素，并且该属性是一个以空格作为分隔的值列表，其中至少有一个值为 value
+- 例子:
+
+```
+    /* 存在title属性的<a> 元素 */
+a[title] {
+  color: purple;
+}
+/* 存在href属性并且属性值匹配"https://example.org"的<a> 元素 */
+a[href="https://example.org"] {
+  color: green;
+}
+/* 存在href属性并且属性值包含"example"的<a> 元素 */
+a[href*="example"] {
+  font-size: 2em;
+}
+/* 存在href属性并且属性值结尾是".org"的<a> 元素 */
+a[href$=".org"] {
+  font-style: italic;
+}
+/* 存在class属性并且属性值包含以空格分隔的"logo"的<a>元素 */
+a[class~="logo"] {
+  padding: 2px;
+}
+/* 以 "#" 开头的页面本地链接 */
+a[href^="#"] {
+  background-color: gold;
+}
+/* 包含 "example" 的链接 */
+a[href*="example"] {
+  background-color: silver;
+}
+/* 以 ".org" 结尾的链接 */
+a[href$=".org"] {
+  color: red;
+}
+/* 将所有包含 `lang` 属性的 <div> 元素的字重设为 bold */
+div[lang] {
+  font-weight: bold;
+}
+/* 将所有语言为美国英语的 <div> 元素的文本颜色设为蓝色 */
+div[lang~="en-us"] {
+  color: blue;
+}
+
+```
+
+
+
+### 4.4. 后代选择器(重要)
+
+- 后代选择器(descendant combinator)
+
+  - 后代选择器一: 所有的后代(直接/间接的后代)
+
+    - 用法:选择器之间以`空格`分割
+    - 例子:
+
+    ```
+    .box span{
+       color: skyblue;
+     }
+    ```
+
+  - 后代选择器二: 直接子代选择器(必须是直接自带)
+
+    - 用法:选择器之间以 `>` 分割 
+    - 例子:
+
+    ```
+    .box > span{
+       font-size: 30px;
+     }
+    ```
+
+
+
+### 4.5. 兄弟选择器
+
+- 兄弟选择器(sibling combinator)
+
+  - 通用兄弟选择器:使用符号 `~` 连接 位置无须紧邻，只须同层级，A~B 选择A元素之后所有同层级B元素 
+
+    - 例子:
+
+    ```
+     .box~.item{
+        font-size: 30px;
+        color: skyblue;
+      }
+    /* p元素后面的同级span都被选中 */
+    p ~ span {
+        color: red;
+      }
+    ```
+
+  - 相邻兄弟选择器:使用符号 `+` 连接 第二个元素紧跟在第一个元素之后，并且两个元素都是属于同一个父元素的子元素，则第二个元素将被选中
+
+    - 例子:
+
+    ```
+     .box+.content {
+      color: red;
+     }
+    /* 图片后面紧跟着的段落将被选中 */
+    img + p {
+    font-style: bold;
+    }
+    ```
+
+
+
+### 4.6. 选择器组(重要)
+
+- 选择器组
+
+  - 交集选择器: 需要同时符合两个选择器条件(两个选择器紧密连接)
+
+  - 可以精准的选择某一个元素
+
+    - 例子:
+
+    ```
+    div.box {
+      color: skyblue;
+    }
+    .box#second {
+      font-size: 30px;
+    }
+    ```
+
+  - 并集选择器:符合一个选择器条件即可(两个选择器以`,`号分割)
+
+  - 给多个元素设置相同的样式
+
+    - 例子:
+
+    ```
+     div.box, p, h2 {
+      color: skyblue;
+    }
+    ```
+
+
+
+
+
+## 五. 预习结构伪类的使用方法。
+
+- 伪类(pseudo-classes)选择器
+
+  - 动态伪类(dynamic pseudo-classes)
+
+    - 属性值:`:link`、`:visited`、`:hover`、`:active`、`:focus`
+    - 用法:
+
+    ```
+    /*  a:link 未访问的链接  */
+     a:link {
+      color: skyblue;
+    }
+    /*  a:visited 已访问的链接  */
+    a:visited {
+      color: darkmagenta;
+      font-size: 30px;
+    }
+    /*  a:focus 获得焦点 tab键 */
+    a:focus {
+      color: green;
+    }
+    /*  a:hover 鼠标挪动到链接上  */
+    a:hover {
+      color: blue;
+    }
+    /*  a:active 激活的链接(鼠标在链接上长按住未松开)  */
+    a:active {
+      color: red;
+      font-size: 24px;
+    }
+    ```
+
+
+
+
+
+## 三. 默写出display常见的值，并且说出对应的特性，并且写出测试案例
+
+block：让元素显示为块级元素;可以让元素独占一行,可以设置宽度和高度,高度默认由内容决定
+
+inline：让元素显示为行内级元素 ;可以和其他行内级元素在同一行,不可以设置宽度和高度,宽度和高度由内容决定
+
+inline-block：让元素同时具备行内级、块级元素的特征 ;可以和其他行内级元素在同一行,可以设置宽度和高度,默认宽度和高度由内容决定
+
+none：隐藏元素
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .one {
+        width: 300px;
+        height: 300px;
+        background-color: pink;
+        overflow: hidden;
+      }
+      .one span {
+        display: block;
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        margin: 10px auto;
+      }
+      p {
+        display: inline;
+        font-size: 20px;
+      }
+      .two::after {
+        /* 插入方块 */
+        content: "";
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: green;
+      }
+      .three {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="one">
+      <span>我要变成块级元素</span>
+    </div>
+    <p>我要变成行内级元素</p>
+    <a href="#">百度一下</a>
+    <div class="two">在元素前面用伪元素插入123</div>
+    <div class="three">我要隐藏</div>
+  </body>
+</html>
+
+```
+
+
+
+## 四. 总结元素隐藏的方法，并且说出他们的区别
+
+* display:none
+
+  * 元素不显示出来, 并且也不占据位置, 不占据任何空间
+
+* visibility:hidden
+
+  * 会占据元素应该占据的空间
+
+* rgba设置颜色,将a的值设置为0
+
+  * rgba的a设置的是alpha值, 可以设置透明度, 不影响子元素
+
+* opacity设置透明度, 设置为0
+
+  * 设置整个元素的透明度, 会影响所有的子元素
+
+
+
+
+
+## 六. 块级元素在设置padding/border的上下时，有什么特殊的地方？
+
