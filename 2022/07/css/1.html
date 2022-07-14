@@ -7,25 +7,22 @@
   <title>Document</title>
 </head>
 <style>
+  /*选中页面中所有的具有class值为red的元素*/
   div {
-    width: 400px;
-    background: black;
-    text-align: right;
-    color: white;
-    text-align-last: justify;
+    color: red;
+    border: 1px solid gray;
   }
 
-  body {
-    font-family: "Adobe 宋体 Std L", serif;
+  div > p {
+    border: inherit;
   }
+
 </style>
 <body>
+
 <div>
-  `text-align` 设置行内`inline`元素的对齐方式, 定义行内`inline`元素（例如`文字`, `图片`）如何相对它的块父元素对齐
-  Integer elementum massa at nulla placerat varius.
-  Suspendisse in libero risus, in interdum massa.
-  Vestibulum ac leo vitae metus faucibus gravida ac in neque.
-  Nullam est eros, suscipit sed dictum quis, accumsan a ligula.
+  <p>123</p>
 </div>
+
 </body>
 </html>

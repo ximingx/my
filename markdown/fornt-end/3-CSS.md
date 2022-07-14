@@ -6,7 +6,7 @@
 
 `CSS`表示层叠样式表, `Cascading Style Sheet`，又称为又称串样式列表、级联样式表、串接样式表、阶层式样式表
 
-## 1. : 初识
+## 1. 初识
 
 ### 1. css 介绍
 
@@ -75,15 +75,10 @@
 > 基础语法
 
 ```css
-选择器 {
-	css属性名: css属性值;
-	css属性名: css属性值;
-	css属性名: css属性值;
-	....
-}
+/* 规则 */
+css属性名: css属性值;
 
-/*例如*/
-
+/* 举例 */
 h1 {
   font-size: 24px;
 }
@@ -113,364 +108,170 @@ h1 {
 
 所以说 `CSS3` 并不是一个完整的版本, 而是多个模块分开进行更新的
 
-## 2. 选择器
+## 2. 属性
 
-### 1. 标签选择器
+### 1. 文本属性
 
-直接使用`HTML标签`的名称作为选择器,就可以直接选中页面中同名的`HTML标签`, 统一添加样式.
+| 属性              | 作用                               | 属性                                                         | 补充                                                         |
+| ----------------- | ---------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `text-align`      | 设置内容的水平对其方式             | `left  `靠左对齐(默认)	<br>`center `水平居中	<br/>`right  `靠右 | 对块状元素有效                                               |
+| `vertical-align`  | 置内容的垂直对其方式               | `top  `顶部对其	<br/>`middle `垂直居中<br/>`bottom `底部  | 对内联元素和表格的单元格元素有效.                            |
+| `line-height`     | 设置行高(一行的高度)               |                                                              | 经常讲行高设置为和元素等高,实现单行文本的垂直居中效果.       |
+| `text-transform`  | 设置英文的大小写转换方式           | `none  `不做修改(默认值)<br/>	`capitalize  `首字母大写<br/>	`uppercase `全部变为大写字母<br/>	`lowercase `全部变为小写字母 | 实际开发中用`JavaScript`代码转化的更多                       |
+| `letter-spacing`  | 设置字母之间的距离                 |                                                              | 汉字作为字符处理,该属性对其生效.                             |
+| `word-spacing`    | 设置单词之间的距离                 |                                                              |                                                              |
+| `text-indent`     | 设置元素内部第一行和左侧的缩进距离 | 用于设置第一行内容的缩进                                     | `text-indent: 2em;` 刚好是缩进2个文字                        |
+| `white-space`     | 设置元素对于空白的处理方式         | `normal `正常处理方式(默认值)<br/>	`pre `显示源代码中的格式,遇到边界不换行<br/>	`nowrap `强制内容不换行(软回车),除非遇到br标签<br/>	`pre-wrap` 显示源代码中的格式,遇到边界换行<br/>	`pre-line`  保持换行字符显示,但是空白字符不显示 |                                                              |
+| `text-decoration` | 设置文本修饰属性                   | `none  `没有修饰线<br/>	 `underline  `下划线<br/>	 `overline   `上划线<br/>	 `line-through `贯穿线/删除线 | 取值为 `none`的时候无任何装饰, 可以去除`a`元素默认的下划线, `a`元素有下划线的本质是被添加了`text-decoration`属性 |
+
+> `text-align` 设置行内`inline`元素的对齐方式, 定义行内`inline`元素（例如`文字`, `图片`）如何相对它的块父元素对齐
+
+属性与值:
+
+`left`：左对齐
+
+`right`：右对齐
+
+`center`：正中间显示
+
+`justify`：两端对齐
+
+> `justify` 单独使用时不会生效, 一般使用场景很少, 会使得左右预留的空间消失, 达到两端对齐, 但是对最后一行无效
 
 ```html
-<div>选中</div>
-<p>不选中</p>
-<div>选中</div>
 <style>
-  /* 选中页面中所有的div元素 */
-  div{
-    color:red;
+  div {
+    width: 400px;
+    background: black;
+    text-align: justify;
+    color: white
   }
-
 </style>
+
+<div>
+  `text-align` 设置行内`inline`元素的对齐方式, 定义行内`inline`元素（例如`文字`, `图片`）如何相对它的块父元素对齐
+</div>
 ```
 
-### 2. 类选择器 
-
-通过为制定的标签添加`class`属性,并且定义一个属性值,在选取时使用`.自定义class值`就可以选中所有具有当前`class值`的标签.
+![image-20220713092903266](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202207130929369.png)
 
 ```html
-	<div class="red">选中</div>	
-	<div class="green">不选中</div>	
-	<span class="red">选中</span>	
-	<style>
-		/*选中页面中所有的具有class值为red的元素*/
-		.red{
-			color:red;
-		}
+<style>
+  div {
+    width: 400px;
+    background: black;
+    text-align: right;
+    color: white;
+  }
+</style>
 
-	</style>
+<div>
+  `text-align` 设置行内`inline`元素的对齐方式, 定义行内`inline`元素（例如`文字`, `图片`）如何相对它的块父元素对齐
+</div>
 ```
 
-### 3. id选择器
+![image-20220713093014396](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202207130930497.png)
 
-通过为指定 的标签添加`id属性`并且定义一个`id值`.
+但是可以使用`text-align-last`使得最后的一行样式生效
 
-```html
-	<div class="red">不选中</div>	
-	<div id="select">选中</div>	
-	<span class="red">不选中</span>	
-	<style>
-		/*选中页面中所有的具有id值为select的元素*/
-		#select{
-			color:red;
-		}
-
-	</style>
+```css
+text-align-last: justify;
 ```
 
-### 4. 组合选择器
+> `line-height`
 
-如果多个选择器使用相同的`CSS`样式,那么我们可以进行`CSS`精简操作,使得`CSS属性`只书写一遍即可.将多个`css`使用逗号分隔即可
+行高可以先简单理解为一行文字所占据的高度
 
-```html
-	<div class="red">选中</div>	
-	<div class="green">选中</div>	
-	<span class="red">选中</span>	
-	<span id="select">选中</span>	
-	<style>
-		/*选中页面中所有的.red、.green、#select元素*/
-		.red,.green,#select{
-			color:red;
-		}
+行高的严格定义是：两行文字基线（`baseline`）之间的间距
 
-	</style>
-```
+基线（`baseline`）：与小写字母`x`最底部对齐的线, 基线的高度永远等于一行的行高 
 
-### 5. 后代选择器
+![image-20220713123439550](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202207131235899.png)
 
-后代选择器是利用标签之间的嵌套关系进行元素的选取,可以很好的限制选取元素的范围.
+可以用于设置一行文字的内容垂直居中, 让`line-height`等同于`height`
 
-```html
-	<div class="red">
-		<span class="red">选中</span>	
-		<span id="select">选中</span>
-    </div>	
-	<div class="green">选中</div>	
-	<style>
-		/*选中页面中所有的具有class值为red的元素*/
-		div.red #select{
-			color:red;
-		}
+> `font`
 
-	</style>
-```
+`font `属性可以用来作为 `font-style`,` font-variant`,` font-weight`, `font-size`, `line-height `和 `font-family` 属性的简写
 
-### 6. 通用选择器
+`font-style、font-variant、font-weight`可以随意调换顺序，也可以省略
 
-选中所有元素,使用时一般用于浏览器之间的样式重置操作或者配合关系选择器进行限定选取
+`font-size`、`font-family`不可以调换顺序，不可以省略
 
-```html
-*{ 
-	margin:0; 
-	padding:0; 
-	list-style:none; 
+`/line-height`可以省略，如果不省略，必须跟在`font-size`后面
+
+### 2. 字体属性
+
+| 属性           | 作用                         |
+| -------------- | ---------------------------- |
+| `font-size`    | 设置字体的大小               |
+| `font-family`  | 设置字体的类型               |
+| `font-weight`  | 设置字体是否是粗体           |
+| `font-style`   | 设置字体是否是斜体           |
+| `font-variant` | 设置字体是否变为小型大写字母 |
+| `font`         | 设置字体                     |
+
+> `font-size`决定文字的大小
+
+浏览器默认字体 `16px`
+
+- 具体数值+单位
+
+比如`100px`
+
+也可以使用`em`单位(不推荐)：`1em`代表`100%`，`2em`代表`200%`，`0.5em`代表`50%`
+
+- 百分比
+
+基于父元素的`font-size`计算，比如`50%`表示等于父元素`font-size`的`一半`
+
+> `font-family`用于设置文字的字体名称
+
+可以设置1个或者多个字体名称; 
+
+浏览器会选择列表中第一个该计算机上有安装的字体; 
+
+或者是通过 `@font-face` 指定的可以直接下载的字体。
+
+```css
+body {
+  font-family: "Adobe 宋体 Std L", serif;
 }
 ```
 
-常用于 `css reaset`
+ `Unicode` 编码以及`多个不连续的英文单词`需要使用 `""` 包裹
 
-### 7. 伪类选择器
+> `font-weight`
 
-根据不同的状态显示不同的样式，一般多用于`<a></a>`标签
+◼ `100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900` ：每一个数字表示一个重量
 
-一般有四种状态：
+◼ `normal`：等于`400 `
 
-`a:link ` 设置正常连接的颜色
+◼ `bold`：等于`700`
 
-`a:hover` 设置鼠标经过时的样式
+`strong`、`b`、`h1~h6`等标签的`font-weight`默认就是`bold`
 
-`a:active` 设置鼠标点击时的样式
+> `font-variant`
 
-`a:visited `设置连接访问过后的状态.
+◼ `normal`：常规显示
 
-### 8. 伪元素选择器
+◼ `small-caps`：将小写字母替换为缩小过的大写字母
 
-- `:first-letter` 为第一个字符的样式
-- `:first-line` 为第一行添加样式
-- `:before` 在元素内容的最前面添加的内容，需要配合`content`属性使用
-- `:after` 在元素内容的最后面添加的内容，需要配合`content`属性使用
+### 3. 颜色属性
 
-### 9. 结构伪类选择器
+`color`属性设置前景色, 不仅仅是文本的颜色
 
-伪类选择器的标志性符号是 `:`。
 
-`CSS`中有一些伪类选择器，比如`:link`、`:active`、`:visited`、`:hover`，这些是动态伪类选择器。
 
-`CSS3`又新增了其它的伪类选择器。即 `CSS3`中的**`结构伪类选择器`**：即通过结构来进行筛选。
 
 
-- `E:first-child` 匹配父元素的第一个子元素E。
 
-- `E:last-child` 匹配父元素的最后一个子元素E。
 
-- `E:nth-child(n)` 匹配父元素的第n个子元素E。注意，盒子的编号是从`1`开始算起，不是从`0`开始算起。
+### 4. 背景属性
 
-- `E:nth-child(odd)` 匹配奇数
+#### 1. background-image
 
-- `E:nth-child(even)` 匹配偶数
-
-- `E:nth-last-child(n)` 匹配父元素的倒数第n个子元素E。
-
-- `E:first-of-type` 匹配同类型中的第一个同级兄弟元素E。
-
-- `E:last-of-type` 匹配同类型中的最后一个同级兄弟元素E。
-
-- `E:nth-of-type(n)` 匹配同类型中的第n个同级兄弟元素E。
-
-- `E:nth-last-of-type(n)` 匹配同类型中的倒数第n个同级兄弟元素E。
-
-既然上面这几个选择器带有`type`，我们可以这样理解：先在同级里找到所有的E类型，然后根据 n 进行匹配。
-
-理解：
-
-（1）这里我们要好好理解父元素的含义，它指的是：以 E 元素的父元素为参考。
-
-- 如果选择器写成`li:nth-child(2)`，则表示第2个 `li`。
-
-- 如果选择器写成`li:nth-child(n)`，则表示所有的`li`。因为此时的 `n` 表示 0,1,2,3,4,5,6,7,8.....（当n小于1时无效，因为n = 0 也是不会选中的）
-
-- 如果选择器写成`li:nth-child(2n)`，则表示所有的第偶数个 `li`。
-
-- 如果选择器写成`li:nth-child(2n+1)`，则表示所有的第奇数个 `li`。
-
-- 如果选择器写成`li:nth-child(-n+5)`，则表示前5个 `li`。
-
-- 如果选择器写成`li:nth-last-child(-n+5)`，则表示最后5个 `li`。
-
-- 如果选择器写成`li:nth-child(7n)`，则表示选中7的倍数。。
-
-上面列举的选择器中，我们只要记住： `n` 表示 0,1,2,3,4,5,6,7,8.....就很容易明白了。
-
-### 10. 属性选择器
-
-属性选择器的标志性符号是 `[]`。
-
-这里涉及到一点正则表达式的内容, 不会的可以简易的先来了解
-
-格式：
-
-- `E[title]` 选中页面的`E元素`，并且E存在 `title `属性即可。
-- `E[title="abc"]`选中页面的`E元素`，并且`E`需要带有`title`属性，且属性值**完全等于**`abc`。
-- `E[attr~=val]`  选择具有 `att `属性且属性值为：用空格分隔的字词列表，其中一个等于 `val `的`E元素`。
-- `E[attr|=val]` 表示要么是一个单独的属性值，要么这个属性值是以“`-`”分隔的。
-- `E[title^="abc"]` 选中页面的`E`元素，并且`E`需要带有 `title 属性`,属性值以 `abc `开头。
-- `E[title$="abc"]` 选中页面的`E`元素，并且`E`需要带有` title 属性`,属性值以 `abc `结尾。
-- `E[title*="abc"]` 选中页面的`E`元素，并且`E`需要带有` title 属性`,属性值任意位置包含`abc`。
-
-### 11. 优先级
-
-#### 11.1 优先级的六大分类
-
-下面的优先级依次降低
-
-> **`! important`** 
-
-只需要在属性后面使用`! important`。它会覆盖页面内任何位置定义的元素样式。
-
-不管别的权重是多少, 反正听他的
-
-> 在`html`中给元素标签加`style`，即内联样式。该方法会造成`css`难以管理，所以不推荐使用。
-
-```html
-<h1 style="display: 'none';">隐藏</h1>
-```
-
-权重为` 1,0,0,0`
-
-> 由一个或多个`id选择器`来定义
-
-权重为 `0,1,0,0`
-
-> 由一个或多个类选择器、属性选择器、伪类选择器定义。
-
-权重为 `0,0,1,0`
-
-> 由一个或多个标签选择器定义。
-
-权重为 `0,0,0,1`
-
-> 通配选择器
-
-优先级最低, 但是会为所有的标签添加属性, 会造成性能的问题
-
-权重为 `0,0,0,0`
-
-> 总结
-
-`! important` > `行内样式` >` id选择器` > `类选择器` > `标签选择器` `伪类选择器` > `通配选择器`
-
-#### 11.2 优先级规则
-
-> 权重值越大，优先级越高
-
-权值从左到右依次比较, 如果相等, 则比较下一位, 如果最后一位也相等, 谁离得近, 则使用谁的样式
-
-`1,0,22,12` 权值大于 `0,22,23,13`
-
-```html
-<head>        
-		.red p{
-            color: red ;    // 红色
-        }
-        .blue p{
-            color: blue ;    // 蓝色
-        }
-</head>
-<body>
-<div class="red">
-    <div class="blue">
-        <p>我是什么颜色？</p>
-    </div>
-</div>
-
-<div class="blue">
-    <div class="red">
-        <p>我是什么颜色？</p>
-    </div>
-</div>
-</body>
-```
-
-最后面的颜色都是蓝色, 因为权值相等, `.blue p` 离代码近
-
-但是需要注意的是, 权值的四个位不会互相影响
-
-用一个夸张的例子解释
-
-```html
-    <style>
-        #id p {
-            color: red;
-        }
-
-        .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 p {
-            color: blue;
-        }
-    </style>
-
-
-<div id="id" class="class1">
-    <div class="class1">
-        <div class="class1">
-            <div class="class1">
-                <div class="class1">
-                    <div class="class1">
-                        <div class="class1">
-                            <div class="class1">
-                                <div class="class1">
-                                    <div class="class1">
-                                        <div class="class1">
-                                            <div class="class1">
-                                                <div class="class1">
-                                                    <div class="class1">
-                                                        <div class="class1">
-                                                            <div class="class1">
-                                                                <div class="class1">
-                                                                    <div class="class1">
-                                                                        <div class="class1">
-                                                                            <p>123</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-```
-
-`#id p ` 的权重是 `0,1,0,1`
-
-`.class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 p` 的权重是 `0,0,19,1`
-
-最后的结果是权重的第二位 `#id p `  大, 因为它的第二权重大
-
-> 属性的继承特性
-
-`CSS `的`继承特性`指的是应用在一个标签上的那些 `CSS `属性被传到其子标签上, 一般会继承 `font `类的属性
-
-如果 `<div>`有个属性 `color: red`，则这个属性将被`<p>` 继承，即 `<p>`也拥有属性 `color: red`。
-
-> 最近的祖先样式比其他祖先样式优先级高。
-
-```html
-<div style="color: red">
-    <div style="color: blue">
-        <div class="son"></div>
-    </div>
-</div>
-```
-
-颜色为 `blue`
-
-## 3: 属性
-
-### 1. 背景属性
-
-#### 1. 属性介绍
-
-> `background-image`
-
-**`background-image`** 属性用于为一个元素设置一个或者多个背景图像。
+> **`background-image`** 属性用于为一个元素设置一个或者多个背景图像。
 
 默认情况下，背景图像放置在元素的左上角，并在垂直和水平方向重复。
 
@@ -497,7 +298,9 @@ body {
 
 ```
 
-`background-image`的属性值模式就是用来给它加 “特技” 的。它的值模式有
+> `background-image`的属性值模式就是用来给它加 “特技” 的。
+
+它的值模式有
 
 1.   `url()模式`
 
@@ -505,63 +308,13 @@ body {
 
 大多数人最基本的只知道给他传入几个颜色值，他就会依次渲染出这几个颜色渐变,但是在 `<css揭秘> `这本书中可以发现 这个属性`linear-gradient() `其实是有很多细节的
 
-第一个参数: 代表的是是方向
+- 第一个参数: 代表的是是方向
 
-第二个参数: 代表的是颜色 以及 长度 和 终点
+- 第二个参数: 代表的是颜色 以及 长度 和 终点
 
-```css
-linear-gradient:(渐变轴的位置（可设置成角度(顺时针)如45deg，或to + [left \ right \ top \bottom] ）， 颜色列表，每个颜色后边可加一个终点位置（可以是百分比或者是沿着渐变轴的长度值）)
-```
-
-
-这里介绍一个实用的 `css `颜色渐变网站 `http://color.oulu.me/`
-
-![](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202205240920679.png)
-
-
-唔,还是专心看下面的代码吧
-
-```css
-background: linear-gradient( red, blue);
-```
-
-![img](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202205240922971.png)
-
-
-在这里从红色向蓝色渐变的时候，两个颜色转变的重点默认是两个颜色的中点，也就是50%处，但是我们也可以手动设置，比如80%
-
-```css
-background: linear-gradient( red, 80%, blue);
-```
-
-![img](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202205240924386.png)
-
-
-```css
-background: linear-gradient( red 50%, blue 50%);
-```
-
-![img](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202205240923528.png)
-
-
-可以发现这里很明显的从中间分割开了,利用百分比可以轻松做出彩色条纹，只要让两个不同颜色的基线之间没有缝隙就不会出现渐变色。
-
-一个小实例
-
-```css
-body {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background: linear-gradient(45deg, #cbcbcb 25%, transparent 25%, transparent 75%, #cbcbcb 75%, #cbcbcb),
-  linear-gradient(135deg, #cbcbcb 25%, transparent 25%, transparent 75%, #cbcbcb 75%, #cbcbcb) 50px 0,
-  linear-gradient(45deg, #cbcbcb 25%, transparent 25%, transparent 75%, #cbcbcb 75%, #cbcbcb) 50px 50px,
-  linear-gradient(135deg, #cbcbcb 25%, transparent 25%, transparent 75%, #cbcbcb 75%, #cbcbcb) 100px 50px;
-  background-size: 100px 100px;
-}
-```
-
-![img](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202205240923072.png)
+  - ```css
+     linear-gradient:(渐变轴的位置（可设置成角度(顺时针)如45deg，或to + [left \ right \ top \bottom] ）， 颜色列表，每个颜色后边可加一个终点位置（可以是百分比或者是沿着渐变轴的长度值）)
+    ```
 
 
 3.   `repeating-linear-gradient()`模式   
@@ -572,7 +325,7 @@ body {
 -   多值模式多余部分的`background-image`并不会启用。
 -   值个数少的多值模式会按照原来的值顺序来循环这个多值以达到需要的多值个数为止。
 
-> `background-repeat`
+#### 2. background-repeat
 
 使背景图像在水平和度垂直方向上重复。
 
@@ -584,7 +337,7 @@ body {
 
 4.   `repeat-y `垂直平铺
 
-> `background-position`
+#### 3. background-position
 
 默认在0 0 或者说是在 left top,此时背景图片将被定位于对象不包括补丁( padding )的内容区域的左上角。
 
@@ -600,7 +353,7 @@ body {
 
 该属性定位不受对象的补丁属性( `padding `)设置影响。
 
-> `background-attachment`
+#### 4. background-attachment
 
 在我看来，背景图片的附着点有三类，分别是浏览器的可视区域、背景容器本身区域和背景容器的内容区域。具体来说，`background-attachment`的值也就有三种，即：
 
@@ -635,7 +388,7 @@ h1 {
 }
 ```
 
-> `background-size`
+#### 5. background-size
 
 **`length`**，该属性值是设置背景图像的宽度和高度的，第一个值是宽度，第二个值是设置高度的。如果只设置第一个值，那么第二个值会自动转换为 “`auto`”;
 
@@ -655,7 +408,7 @@ h1 {
 
 如果一个指定的图像无法被绘制 (比如，被指定的 `URI `所表示的文件无法被加载)，浏览器会将此情况等同于其值被设为 `none`。
 
-#### 2. 使用场景
+#### 6. 使用场景
 
 ##### 1. 背景适配
 
@@ -838,152 +591,7 @@ h1 {
 
 ![[图片)]](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202205240915893.png)
 
-### 2. 字体属性
 
-| 属性           | 作用                         |
-| -------------- | ---------------------------- |
-| `font-size`    | 设置字体的大小               |
-| `font-family`  | 设置字体的类型               |
-| `font-weight`  | 设置字体是否是粗体           |
-| `font-style`   | 设置字体是否是斜体           |
-| `font-variant` | 设置字体是否变为小型大写字母 |
-| `font`         | 设置字体                     |
-
-> `font-size`决定文字的大小
-
-浏览器默认字体 `16px`
-
-- 具体数值+单位
-
-比如`100px`
-
-也可以使用`em`单位(不推荐)：`1em`代表`100%`，`2em`代表`200%`，`0.5em`代表`50%`
-
-- 百分比
-
-基于父元素的`font-size`计算，比如`50%`表示等于父元素`font-size`的`一半`
-
-> `font-family`用于设置文字的字体名称
-
-可以设置1个或者多个字体名称; 
-
-浏览器会选择列表中第一个该计算机上有安装的字体; 
-
-或者是通过 `@font-face` 指定的可以直接下载的字体。
-
-```css
-body {
-  font-family: "Adobe 宋体 Std L", serif;
-}
-```
-
- `Unicode` 编码以及`多个不连续的英文单词`需要使用 `""` 包裹
-
-> `font-weight`
-
-◼ `100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900` ：每一个数字表示一个重量
-
-◼ `normal`：等于`400 `
-
-◼ `bold`：等于`700`
-
-`strong`、`b`、`h1~h6`等标签的`font-weight`默认就是`bold`
-
-> `font-variant`
-
-◼ `normal`：常规显示
-
-◼ `small-caps`：将小写字母替换为缩小过的大写字母
-
-> `line-height`
-
-行高可以先简单理解为一行文字所占据的高度
-
-行高的严格定义是：两行文字基线（`baseline`）之间的间距
-
-基线（`baseline`）：与小写字母`x`最底部对齐的线
-
-![image-20220713123439550](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202207131235899.png)
-
-可以用于设置一行文字的内容垂直居中, 让`line-height`等同于`height`
-
-> `font`
-
-
-
-
-
-### 3. 颜色属性
-
-`color`属性设置前景色, 不仅仅是文本的颜色
-
-### 4. 文本属性
-
-| 属性              | 作用                               | 属性                                                         | 补充                                                         |
-| ----------------- | ---------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `text-align`      | 设置内容的水平对其方式             | `left  `靠左对齐(默认)	<br>`center `水平居中	<br/>`right  `靠右 | 对块状元素有效                                               |
-| `vertical-align`  | 置内容的垂直对其方式               | `top  `顶部对其	<br/>`middle `垂直居中<br/>`bottom `底部  | 对内联元素和表格的单元格元素有效.                            |
-| `line-height`     | 设置行高(一行的高度)               |                                                              | 经常讲行高设置为和元素等高,实现单行文本的垂直居中效果.       |
-| `text-transform`  | 设置英文的大小写转换方式           | `none  `不做修改(默认值)<br/>	`capitalize  `首字母大写<br/>	`uppercase `全部变为大写字母<br/>	`lowercase `全部变为小写字母 | 实际开发中用`JavaScript`代码转化的更多                       |
-| `letter-spacing`  | 设置字母之间的距离                 |                                                              | 汉字作为字符处理,该属性对其生效.                             |
-| `word-spacing`    | 设置单词之间的距离                 |                                                              |                                                              |
-| `text-indent`     | 设置元素内部第一行和左侧的缩进距离 | 用于设置第一行内容的缩进                                     | `text-indent: 2em;` 刚好是缩进2个文字                        |
-| `white-space`     | 设置元素对于空白的处理方式         | `normal `正常处理方式(默认值)<br/>	`pre `显示源代码中的格式,遇到边界不换行<br/>	`nowrap `强制内容不换行(软回车),除非遇到br标签<br/>	`pre-wrap` 显示源代码中的格式,遇到边界换行<br/>	`pre-line`  保持换行字符显示,但是空白字符不显示 |                                                              |
-| `text-decoration` | 设置文本修饰属性                   | `none  `没有修饰线<br/>	 `underline  `下划线<br/>	 `overline   `上划线<br/>	 `line-through `贯穿线/删除线 | 取值为 `none`的时候无任何装饰, 可以去除`a`元素默认的下划线, `a`元素有下划线的本质是被添加了`text-decoration`属性 |
-
-> `text-align` 设置行内`inline`元素的对齐方式, 定义行内`inline`元素（例如`文字`, `图片`）如何相对它的块父元素对齐
-
-属性与值:
-
-`left`：左对齐
-
-`right`：右对齐
-
-`center`：正中间显示
-
-`justify`：两端对齐
-
-> `justify` 单独使用时不会生效, 一般使用场景很少, 会使得左右预留的空间消失, 达到两端对齐, 但是对最后一行无效
-
-```html
-<style>
-  div {
-    width: 400px;
-    background: black;
-    text-align: justify;
-    color: white
-  }
-</style>
-
-<div>
-  `text-align` 设置行内`inline`元素的对齐方式, 定义行内`inline`元素（例如`文字`, `图片`）如何相对它的块父元素对齐
-</div>
-```
-
-![image-20220713092903266](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202207130929369.png)
-
-```html
-<style>
-  div {
-    width: 400px;
-    background: black;
-    text-align: right;
-    color: white;
-  }
-</style>
-
-<div>
-  `text-align` 设置行内`inline`元素的对齐方式, 定义行内`inline`元素（例如`文字`, `图片`）如何相对它的块父元素对齐
-</div>
-```
-
-![image-20220713093014396](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202207130930497.png)
-
-但是可以使用`text-align-last`使得最后的一行样式生效
-
-```css
-text-align-last: justify;
-```
 
 ### 5. 书写模式
 
@@ -1117,7 +725,572 @@ text-align-last: justify;
 
 	常用的浮动位置:水平导航,页面布局,文字环绕.
 
-## 四: 盒子模型
+## 3. 选择器
+
+开发中经常需要找到特定的网页元素进行设置样式, 我们可以通过` css选择器` 按照一定的规则选出符合条件的元素，为之添加`CSS样式`
+
+> 选择器效率比较低，大概可以这么归类
+
+- 通用选择器（`universal selector`） 
+- 元素选择器（`type selectors`） 
+- 类选择器（`class selectors`） 
+- `id`选择器（`id selectors`） 
+- 属性选择器（`attribute selectors`） 
+- 组合（`combinators`） 
+- 伪类（`pseudo-classes`） 
+- 伪元素（`pseudo-elements`）
+
+### 1. 通用选择器
+
+所有的元素都会被选中,  使用时一般用于浏览器之间的样式重置操作或者配合关系选择器进行限定选取
+
+```css
+  * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+```
+
+一般用来给所有元素作一些通用性的设置, 会对所有的元素设置属性, 效率比较低，尽量不要使用
+
+> `css reaset`
+
+`normalize.css`
+
+### 2. 元素选择器
+
+直接使用`HTML标签`的名称作为选择器,就可以直接选中页面中同名的`HTML标签`, 统一添加样式.
+
+```html
+<div>选中</div>
+<p>不选中</p>
+<div>选中</div>
+<style>
+  /* 选中页面中所有的div元素 */
+  div{
+    color:red;
+  }
+
+</style>
+```
+
+### 3. 类选择器
+
+通过为制定的标签添加`class`属性,并且定义一个属性值,在选取时使用`.自定义class值`就可以选中所有具有当前`class值`的标签.
+
+```html
+	<div class="red">选中</div>	
+	<div class="green">不选中</div>	
+	<span class="red">选中</span>	
+	<style>
+		/*选中页面中所有的具有class值为red的元素*/
+		.red{
+			color:red;
+		}
+
+	</style>
+```
+
+### 4. id选择器
+
+通过为指定 的标签添加`id属性`并且定义一个`id值`. 一个`HTML`文档里面的`id值`是唯一的，不能重复
+
+`id值`如果由多个单词组成，单词之间可以用中划线`-`、下划线`_`连接，也可以使用`驼峰标识`
+
+最好不要用标签名作为`id值 `
+
+```html
+	<div class="red">不选中</div>	
+	<div id="select">选中</div>	
+	<span class="red">不选中</span>	
+	<style>
+		/*选中页面中所有的具有id值为select的元素*/
+		#select{
+			color:red;
+		}
+
+	</style>
+```
+
+### 5. 属性选择器
+
+属性选择器的标志性符号是 `[]`。
+
+- 拥有某一个`att`属性 `[att]`
+- `att`属性等于`value`值 `[att="val"] `
+
+- `E[title]` 选中页面的`E元素`，并且E存在 `title `属性即可。
+- `E[title="abc"]`选中页面的`E元素`，并且`E`需要带有`title`属性，且属性值完全等于`abc`。
+- `E[attr~=val]`  选择具有 `att `属性且属性值为：用空格分隔的字词列表，其中一个等于 `val `的`E元素`。
+- `E[attr|=val]` 表示要么是一个单独的属性值，要么这个属性值是以“`-`”分隔的。
+- `E[title^="abc"]` 选中页面的`E`元素，并且`E`需要带有 `title 属性`,属性值以 `abc `开头。
+- `E[title$="abc"]` 选中页面的`E`元素，并且`E`需要带有` title 属性`,属性值以 `abc `结尾。
+- `E[title*="abc"]` 选中页面的`E`元素，并且`E`需要带有` title 属性`,属性值任意位置包含`abc`。
+
+```css
+  [title] {
+    color: red;
+  }
+
+ /* 中间不能有空格 */ 
+  p[title] {
+    color: red;
+  }
+
+  p[title*="h1-title"] {
+    color: red;
+  }
+```
+
+### 5. 后代选择器
+
+后代选择器是利用标签之间的嵌套关系进行元素的选取,可以很好的限制选取元素的范围.
+
+选择器之间以空格分割
+
+> 所有的后代(直接/间接的后代)  选择器之间以空格分割
+
+```html
+<div class="red">
+  <span class="red">选中</span>
+  <span id="select">选中</span>
+</div>
+<div class="green">选中</div>
+
+<style>
+  /*选中页面中所有的具有class值为red的元素*/
+  div.red #select{
+    color:red;
+  }
+</style>
+```
+
+> 直接子代选择器(必须是直接自带)
+
+选择器之间以` >` 分割
+
+```css
+div > span {
+  color: red;
+}
+```
+
+### 6. 兄弟选择器
+
+> 相邻兄弟选择器 `+`
+
+若果第一个不是选择的元素, 不生效
+
+> 普遍兄弟选择器 `~ `
+
+对所有之后的兄弟选择
+
+### 7. 交集选择器
+
+交集选择器: 需要同时符合两个选择器条件, 在开发中通常为了精准的选择某一个元素
+
+```css
+div.box {
+    
+}
+```
+
+### 8. 并集选择器
+
+如果多个选择器使用相同的`CSS`样式,那么我们可以进行`CSS`精简操作,使得`CSS属性`只书写一遍即可.将多个`css`使用逗号分隔即可
+
+```html
+	<div class="red">选中</div>	
+	<div class="green">选中</div>	
+	<span class="red">选中</span>	
+	<span id="select">选中</span>	
+	<style>
+		/*选中页面中所有的.red、.green、#select元素*/
+		.red,.green,#select{
+			color:red;
+		}
+
+	</style>
+```
+
+### 9. 伪类选择器
+
+伪类是选择器的一种，它用于选择处于特定状态的元素
+
+![image-20220714151257243](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202207141512355.png)
+
+#### 1. 动态伪类
+
+根据不同的状态显示不同的样式，一般多用于`<a></a>`标签
+
+> 一般有四种状态：
+
+`a:link ` 设置正常连接的颜色
+
+`a:hover` 设置鼠标经过时的样式
+
+`a:active` 设置鼠标点击时的样式
+
+`a:visited `设置连接访问过后的状态.
+
+> 使用注意
+
+`:hover`必须放在`:link`和`:visited`后面才能完全生效
+
+`:active`必须放在`:hover`后面才能完全生效
+
+所以建议的编写顺序是 `:link`、`:visited`、`:hover`、`:active`
+
+除了`a`元素，`:hover`、`:active`也能用在其他元素上
+
+> ` :focus`指当前拥有输入焦点的元素
+
+因为链接`a`元素可以被键盘的`Tab`键选中聚焦，所以`:focus`也适用于`a`元素
+
+> 直接给`a`元素设置样式，相当于给`a`元素的所有动态伪类都设置了
+
+相当于`a:link`、`a:visited`、`a:hover`、`a:active`、`a:focus`的`color`都是`red`
+
+#### 2. 目标伪类
+
+`:target` 与 `id` 有关
+
+#### 3. 伪元素选择器
+
+- `:first-letter` 为第一个字符的样式
+- `:first-line` 为第一行添加样式
+- `:before` 在元素内容的最前面添加的内容，需要配合`content`属性使用
+- `:after` 在元素内容的最后面添加的内容，需要配合`content`属性使用
+
+> 注意
+
+为了区分伪元素和伪类，建议伪元素使用`2个冒`号，比如`::first-line`
+
+#### 4. 结构伪类选择器
+
+伪类选择器的标志性符号是 `:`。
+
+`CSS`中有一些伪类选择器，比如`:link`、`:active`、`:visited`、`:hover`，这些是动态伪类选择器。
+
+`CSS3`又新增了其它的伪类选择器。即 `CSS3`中的**`结构伪类选择器`**：即通过结构来进行筛选。
+
+
+- `E:first-child` 匹配父元素的第一个子元素E。
+
+- `E:last-child` 匹配父元素的最后一个子元素E。
+
+- `E:nth-child(n)` 匹配父元素的第n个子元素E。注意，盒子的编号是从`1`开始算起，不是从`0`开始算起。
+
+- `E:nth-child(odd)` 匹配奇数
+
+- `E:nth-child(even)` 匹配偶数
+
+- `E:nth-last-child(n)` 匹配父元素的倒数第n个子元素E。
+
+- `E:first-of-type` 匹配同类型中的第一个同级兄弟元素E。
+
+- `E:last-of-type` 匹配同类型中的最后一个同级兄弟元素E。
+
+- `E:nth-of-type(n)` 匹配同类型中的第n个同级兄弟元素E。
+
+- `E:nth-last-of-type(n)` 匹配同类型中的倒数第n个同级兄弟元素E。
+
+既然上面这几个选择器带有`type`，我们可以这样理解：先在同级里找到所有的E类型，然后根据 n 进行匹配。
+
+理解：
+
+（1）这里我们要好好理解父元素的含义，它指的是：以 E 元素的父元素为参考。
+
+- 如果选择器写成`li:nth-child(2)`，则表示第2个 `li`。
+
+- 如果选择器写成`li:nth-child(n)`，则表示所有的`li`。因为此时的 `n` 表示 0,1,2,3,4,5,6,7,8.....（当n小于1时无效，因为n = 0 也是不会选中的）
+
+- 如果选择器写成`li:nth-child(2n)`，则表示所有的第偶数个 `li`。
+
+- 如果选择器写成`li:nth-child(2n+1)`，则表示所有的第奇数个 `li`。
+
+- 如果选择器写成`li:nth-child(-n+5)`，则表示前5个 `li`。
+
+- 如果选择器写成`li:nth-last-child(-n+5)`，则表示最后5个 `li`。
+
+- 如果选择器写成`li:nth-child(7n)`，则表示选中7的倍数。。
+
+上面列举的选择器中，我们只要记住： `n` 表示 0,1,2,3,4,5,6,7,8.....就很容易明白了。
+
+### 10. 优先级
+
+#### 1. 优先级的六大分类
+
+下面的优先级依次降低
+
+> **`! important`** 
+
+只需要在属性后面使用`! important`。它会覆盖页面内任何位置定义的元素样式。
+
+不管别的权重是多少, 反正听他的
+
+> 在`html`中给元素标签加`style`，即内联样式。该方法会造成`css`难以管理，所以不推荐使用。
+
+```html
+<h1 style="display: 'none';">隐藏</h1>
+```
+
+权重为` 1,0,0,0`
+
+> 由一个或多个`id选择器`来定义
+
+权重为 `0,1,0,0`
+
+> 由一个或多个类选择器、属性选择器、伪类选择器定义。
+
+权重为 `0,0,1,0`
+
+> 由一个或多个标签选择器定义。
+
+权重为 `0,0,0,1`
+
+> 通配选择器
+
+优先级最低, 但是会为所有的标签添加属性, 会造成性能的问题
+
+权重为 `0,0,0,0`
+
+> 总结
+
+`! important` > `行内样式` >` id选择器` > `类选择器` > `标签选择器` `伪类选择器` > `通配选择器`
+
+## 4. 属性的特性
+
+### 1. 继承
+
+如果一个属性具备继承性, 那么在该元素上设置后, 它的后代元素都可以继承这个属性
+
+当然, 如果后代元素自己有设置该属性, 那么优先使用后代元素自己的属性(不管继承过来的属性权重多高)
+
+常见的`font-size/font-family/font-weight/line-height/color/text-align`都具有继承性
+
+> 强制继承 `inherit`
+
+```html
+<style>
+  div {
+    color: red;
+    border: 1px solid gray;
+  }
+    
+  div > p {
+    /*强制继承*/
+    border: inherit; 
+  }
+</style>
+
+<div>
+  <p>123</p>
+</div>
+```
+
+> 最近的祖先样式比其他祖先样式优先级高。
+
+```html
+<div style="color: red">
+    <div style="color: blue">
+        <div class="son"></div>
+        <!-- 颜色为 `blue` -->
+    </div>
+</div>
+```
+
+### 2. 层叠
+
+对于一个元素来说, 相同一个属性我们可以通过不同的选择器给它进行多次设置, 属性会被一层层覆盖上去, 但是最终只有一个会生效
+
+> 判断依据
+
+- 选择器的权重, 权重大的生效, 根据权重可以判断出优先级
+
+- 先后顺序, 权重相同时, 后面设置的生效
+
+> 权重计算
+
+按照经验，为了方便比较CSS属性的优先级，可以给CSS属性所处的环境定义一个权值
+
+◼ `!important`：10000
+
+◼ 内联样式：1000
+
+◼ ` id`选择器：100
+
+◼ 类选择器、属性选择器、伪类：10
+
+◼ 元素选择器、伪元素：1 
+
+◼ 通配符：0
+
+> 权重值越大，优先级越高
+
+权值从左到右依次比较, 如果相等, 则比较下一位, 如果最后一位也相等, 谁离得近, 则使用谁的样式
+
+`1,0,22,12` 权值大于 `0,22,23,13`
+
+```html
+<head>        
+		.red p{
+            color: red ;    // 红色
+        }
+        .blue p{
+            color: blue ;    // 蓝色
+        }
+</head>
+<body>
+<div class="red">
+    <div class="blue">
+        <p>我是什么颜色？</p>
+    </div>
+</div>
+
+<div class="blue">
+    <div class="red">
+        <p>我是什么颜色？</p>
+    </div>
+</div>
+</body>
+```
+
+最后面的颜色都是蓝色, 因为权值相等, `.blue p` 离代码近
+
+但是需要注意的是, 权值的四个位不会互相影响
+
+用一个夸张的例子解释
+
+```html
+    <style>
+        #id p {
+            color: red;
+        }
+
+        .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 p {
+            color: blue;
+        }
+    </style>
+
+
+<div id="id" class="class1">
+    <div class="class1">
+        <div class="class1">
+            <div class="class1">
+                <div class="class1">
+                    <div class="class1">
+                        <div class="class1">
+                            <div class="class1">
+                                <div class="class1">
+                                    <div class="class1">
+                                        <div class="class1">
+                                            <div class="class1">
+                                                <div class="class1">
+                                                    <div class="class1">
+                                                        <div class="class1">
+                                                            <div class="class1">
+                                                                <div class="class1">
+                                                                    <div class="class1">
+                                                                        <div class="class1">
+                                                                            <p>123</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+`#id p ` 的权重是 `0,1,0,1`
+
+`.class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 .class1 p` 的权重是 `0,0,19,1`
+
+最后的结果是权重的第二位 `#id p `  大, 因为它的第二权重大
+
+## 5. 元素显示方式
+
+块级元素（`block-level elements`）: 独占父元素的一行
+
+行内级元素（`inline-level elements`）:多个行内级元素可以在父元素的同一行中显示
+
+`div`是块级元素, `span`是行内级元素, `div`之所以是块级元素仅仅是因为浏览器默认设置了`display`属性而已
+
+### 1. display
+
+`block`：让元素显示为块级元素
+
+- 独占父元素的一行
+- 可以随意设置宽高
+- 高度默认由内容决定
+
+`inline`：让元素显示为行内级元素
+
+- 跟其他行内级元素在同一行显示; 
+- 不可以随意设置宽高; 
+- 宽高都由内容决定;
+
+`inline-block`：让元素同时具备行内级、块级元素的特征
+
+- 对外来说，它是一个行内级元素
+- 对内来说，它是一个块级元素
+- 特殊情况，`p`元素不能包含其他块级元素
+
+`none`：隐藏元素
+
+### 2. 设置元素的隐藏方式
+
+◼ 方法一: `display`设置为`none`
+
+元素不显示出来, 并且也不占据位置, 不占据任何空间(和不存在一样);
+
+◼ 方法二: `visibility`设置为`hidden`
+
+设置为`hidden`, 虽然元素不可见, 但是会占据元素应该占据的空间; 
+
+默认为`visible`, 元素是可见的; 
+
+◼ 方法三: `rgba`设置颜色, 将`a`的值设置为`0 `
+
+`rgba`的`a`设置的是`alpha`值, 可以设置透明度, 不影响子元素; 
+
+◼ 方法四: `opacity`设置透明度, 设置为`0 `
+
+设置整个元素的透明度, 会影响所有的子元素;
+
+### 3. overflow
+
+◼ `visible`：溢出的内容照样可见
+
+◼ `hidden`：溢出的内容直接裁剪
+
+◼ `scroll`：溢出的内容被裁剪，但可以通过滚动机制查看
+
+◼ 会一直显示滚动条区域，滚动条区域占用的空间属于`width`、`height`
+
+◼ `auto`：自动根据内容是否溢出来决定是否提供滚动机制
+
+
+
+
+
+
+
+## 5. 盒子模型
 
 页面中的任何一个元素在显示和处理时都是以一个盒子的方式进行处理的.
 
@@ -1156,7 +1329,7 @@ text-align-last: justify;
 
 格式4:`margin`:值1 值2 值3 值4  上方向外间距值1,右方向外间距值2,下方向外间距值3,左方向外间距值4(顺时针设置)
 
-## 五:  度量单位
+## 6.  度量单位
 
 `px` 像素单位
 
@@ -1206,7 +1379,7 @@ text-align-last: justify;
 	
 	1in = 6pc
 
-**`rem`** 是CSS3新增的一个（root em）
+**`rem`** 是`CSS3`新增的一个（`root em`）
 
 ```css
 相对单位
@@ -1229,7 +1402,13 @@ text-align-last: justify;
 	1vh 高度为相对于视窗的高度的百分之一
 ```
 
-## 六: 补充知识
+## 7. 布局
+
+
+
+
+
+## @ 补充知识
 
 ### 1. BFC
 
@@ -4104,6 +4283,14 @@ R（红）、G（绿）、B （蓝）可以是`<number>`（数字），或者`<p
 
 在绘制阶段，遍历渲染树，调用渲染器的`paint()`方法在屏幕上显示其内容。渲染树的绘制工作是由浏览器的`UI后端组件`完成的。
 
+## @收藏网站
+
+> 介绍一个实用的 `css `颜色渐变网站 `http://color.oulu.me/`
+
+![](https://raw.githubusercontent.com/ximingx/Figurebed/master/imgs/202205240920679.png)
+
+
+
 
 
 # X> 面试
@@ -5082,3 +5269,30 @@ none：隐藏元素
 
 ## 六. 块级元素在设置padding/border的上下时，有什么特殊的地方？
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+当你看到这里的时候, 我其实想说, 最后我觉得, 记笔记现在其实效率远远不如直接看文档, 但是, 之前的笔记确实有过很大的帮助
