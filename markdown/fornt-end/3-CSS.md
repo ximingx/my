@@ -1298,7 +1298,7 @@ div.box {
 
 ### 1. width height
 
-宽度设置: `width`
+宽度设置: `width`, 默认值 `auto`
 
 高度设置: `height`
 
